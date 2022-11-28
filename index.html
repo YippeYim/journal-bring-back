@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<<style>
+        :root{
+            --textWidth:40vw;
+        }
+        body{
+            margin:0px;
+            display:flex;
+            justify-content:center;
+        }
+        #title {
+            width:var(--textWidth);
+            font-size:30px;
+            border:none;
+            border-bottom:2px solid gray;
+        }
+        #title:focus{
+            outline:none;
+        }
+        .underline{
+            border-bottom:3px solid blue;
+            width:0px;
+        }
+        #title:focus ~ .underline {
+            width:var(--textWidth);
+            transition: 0.2s;
+        }
+        
+    </style>/head>
+<body>
+    <div class="title">
+        <input type="text" id="title" placeholder="title - type here..">
+        <div class="underline" id="myline"></div>
+    </div>
+    <div class="container">
+        
+    </div>
+</body>
+</html>
