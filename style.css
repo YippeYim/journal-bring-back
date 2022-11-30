@@ -1,0 +1,47 @@
+:root{
+    --text-size: 25px;
+    --title-width: 500px;
+    --bgcolor: white;
+}
+body{
+    margin:0px;
+    width:100vw;
+    display:flex;
+    justify-content:center;
+}
+.journal-box{
+    margin-top:20px;
+    width:var(--title-width);
+    /* border:1px solid red; */
+}
+.underline{
+    border-bottom:2px solid blue;
+    width:0px;
+    margin-top:2px;
+} 
+#input-title{
+    width:var(--title-width);
+    font-size:var(--text-size);
+    border:none; 
+    border-bottom:1px solid black;
+}
+#input-title:focus{
+    outline:none;
+}
+#input-title:focus ~ .underline{
+    width:var(--title-width);
+    transition:0.135s;
+}
+
+/* to do: make this with javascript(add new li when hover) */
+#li-can-hide-top, #li-can-hide-below{
+    color:var(--bgcolor);
+    color:black;
+}
+.add-new-bullet-ontop{
+    border:1px solid red;
+    height:40px;
+}
+.add-new-bullet-ontop:hover ~  #li-can-hide-top{
+    color:red;
+}

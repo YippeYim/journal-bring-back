@@ -5,41 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-<<style>
-        :root{
-            --textWidth:40vw;
-        }
-        body{
-            margin:0px;
-            display:flex;
-            justify-content:center;
-        }
-        #title {
-            width:var(--textWidth);
-            font-size:30px;
-            border:none;
-            border-bottom:2px solid gray;
-        }
-        #title:focus{
-            outline:none;
-        }
-        .underline{
-            border-bottom:3px solid blue;
-            width:0px;
-        }
-        #title:focus ~ .underline {
-            width:var(--textWidth);
-            transition: 0.2s;
-        }
-        
-    </style>/head>
+    <link rel="stylesheet" href="style.css">
+</head>
 <body>
-    <div class="title">
-        <input type="text" id="title" placeholder="title - type here..">
-        <div class="underline" id="myline"></div>
-    </div>
-    <div class="container">
+    <div class="journal-box">
+        <input type="text" id="input-title" placeholder="Title: type here..">
+        <div class="underline"></div>
         
+        <li id="li-can-hide-top"><div class="add-new-bullet-ontop" onclick="addNewBulletOntop" ></div></li>
+        <li><input type="text" class="input-bullet"></li>
+        <li id="li-can-hide-below"><div class="add-new-bullet-below" onclick="addNewBulletBelow"></div></li>
     </div>
 </body>
 </html>
