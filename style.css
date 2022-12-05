@@ -32,16 +32,3 @@ body{
     width:var(--title-width);
     transition:0.135s;
 }
-
-/* to do: make this with javascript(add new li when hover) */
-#li-can-hide-top, #li-can-hide-below{
-    color:var(--bgcolor);
-    color:black;
-}
-.add-new-bullet-ontop{
-    border:1px solid red;
-    height:40px;
-}
-.add-new-bullet-ontop:hover ~  #li-can-hide-top{
-    color:red;
-}
