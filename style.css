@@ -2,6 +2,8 @@
     --text-size: 25px;
     --title-width: 500px;
     --bgcolor: white;
+    --stcolor: black;
+    --ndcolor: rgb(192, 131, 131);
 }
 body{
     margin:0px;
@@ -32,3 +34,18 @@ body{
     width:var(--title-width);
     transition:0.135s;
 }
+
+#above-space{
+    border:1px solid red;
+    height:30px;
+}
+#above-space:hover ~ #above-bullet{
+    color:var(--ndcolor);
+}
+#above-bullet{
+    color:var(--bgcolor);
+}
+#above-bullet:hover{
+    color:var(--ndcolor);
+}
+
