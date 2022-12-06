@@ -2,11 +2,21 @@ const addBtnElements = document.getElementsByClassName("add-bullet")
 
 for(let i=0;i<addBtnElements.length;i++){
     addBtnElements[i].addEventListener('click',()=>{
-        // tell dest by element's classname
-        addBullet(addBtnElements[i].classList[1])
+        addBullet(addBtnElements[i])
     })
 }
 
-function addBullet(dest){
-    console.log(dest)
+const ul = document.getElementById("bullet-list")
+
+function addBullet(element){
+    const newBullet = document.createElement("li")
+    if (element.classList.contains("above")){
+        // add bullet above
+        newBullet.innerHTML = "<input type='text' class='input-bullet'>"
+        ul.insertBefore(newBullet, ul.children[2])
+        ul.children[2].firstChild.focus()
+    }
+    if (element.classList.contains("bottom")){
+        // add bullet above
+    }
 }
