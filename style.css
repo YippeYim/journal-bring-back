@@ -12,7 +12,7 @@ body{
     justify-content:center;
 }
 .journal-box{
-    margin-top:20px;
+    margin-top:40px;
     width:var(--title-width);
     /* border:1px solid red; */
 }
@@ -21,9 +21,19 @@ body{
     width:0px;
     margin-top:2px;
 } 
+
+ul{
+    margin-top:0px;
+}
+li:not(.add-bullet){
+    color:var(--stcolor);
+    font-size:25px;
+}
+
 #input-title{
     width:var(--title-width);
     font-size:var(--text-size);
+    font-weight:bold;
     border:none; 
     border-bottom:1px solid black;
 }
@@ -35,9 +45,22 @@ body{
     transition:0.135s;
 }
 
+.input-bullet{
+    font-size:20px;
+    margin-bottom:5px;
+    border:none;
+}
+.input-bullet:focus{
+    outline:none;
+}
+li:has(.input-bullet:focus){
+    list-style: circle;
+}
+
+
 #above-space{
-    border:1px solid red;
-    height:30px;
+    /* border:1px solid red; */
+    height:50px;
 }
 #above-space:hover ~ #above-bullet{
     color:var(--ndcolor);
@@ -57,7 +80,7 @@ body{
     color:var(--ndcolor);
 }
 #bottom-space{
-    border:1px solid red;
+    /* border:1px solid red; */
     height:300px;
 }
 #bottom-space:hover ~ #above-bullet{

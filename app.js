@@ -18,7 +18,6 @@ function addBullet(element){
     }
     if (element.classList.contains("bottom")){
         // add bullet above
-        console.log("123")
         newBullet.innerHTML = "<input type='text' class='input-bullet'>"
         ul.insertBefore(newBullet, ul.children[ul.childElementCount-1])
         ul.children[ul.childElementCount-2].firstChild.focus()
