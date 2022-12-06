@@ -49,3 +49,17 @@ body{
     color:var(--ndcolor);
 }
 
+
+#bottom-bullet{
+    color:var(--bgcolor);
+}
+#bottom-bullet:hover{
+    color:var(--ndcolor);
+}
+#bottom-space{
+    border:1px solid red;
+    height:300px;
+}
+#bottom-space:hover ~ #above-bullet{
+    color:var(--ndcolor);
+}
