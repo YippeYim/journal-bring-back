@@ -13,8 +13,28 @@ body{
 }
 .journal-box{
     margin-top:40px;
-    width:var(--title-width);
+    /* width:var(--title-width); */
+    width:550px;
     /* border:1px solid red; */
+    display:flex;
+    flex-direction: column;
+}
+ul{
+    /* border:1px solid red; */
+    margin-top:0px;
+}
+li{
+    margin-left:10px;
+    /* border:1px solid green; */
+}
+li:hover{
+    /* background-color: red; */
+    /* padding-left:3px; */
+    margin-left:3px;
+}
+li:not(.add-bullet){
+    color:var(--stcolor);
+    font-size:25px;
 }
 .underline{
     border-bottom:2px solid blue;
@@ -22,12 +42,9 @@ body{
     margin-top:2px;
 } 
 
-ul{
-    margin-top:0px;
-}
-li:not(.add-bullet){
-    color:var(--stcolor);
-    font-size:25px;
+.title{
+    margin-top:15px;
+    /* border:1px solid green; */
 }
 
 #input-title{
@@ -46,6 +63,7 @@ li:not(.add-bullet){
 }
 
 .input-bullet{
+    width:100%;
     font-size:20px;
     margin-bottom:5px;
     border:none;
@@ -60,27 +78,20 @@ li:has(.input-bullet:focus){
 
 #above-space{
     /* border:1px solid red; */
-    height:50px;
+    height:20px;
 }
 #above-space:hover ~ #above-bullet{
     color:var(--ndcolor);
 }
-#above-bullet{
+#above-bullet, #bottom-bullet{
     color:var(--bgcolor);
 }
-#above-bullet:hover{
+#above-bullet:hover, #bottom-bullet:hover{
     color:var(--ndcolor);
 }
 
 
-#bottom-bullet{
-    color:var(--bgcolor);
-}
-#bottom-bullet:hover{
-    color:var(--ndcolor);
-}
 #bottom-space{
-    /* border:1px solid red; */
     height:300px;
 }
 #bottom-space:hover ~ #above-bullet{
