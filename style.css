@@ -6,7 +6,7 @@
     --ndcolor: rgb(192, 131, 131);
 }
 *{
-    /* border:1px solid red; */
+    border:0px solid red;
 }
 body{
     margin:0px;
