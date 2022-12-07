@@ -16,18 +16,18 @@ function addBullet(element){
         // add bullet above
         ul.insertBefore(newBullet, ul.children[2])
         ul.children[2].firstChild.focus()
-        return
     }
     if (element.classList.contains("bottom")){
         // add bullet above
         ul.insertBefore(newBullet, ul.children[ul.childElementCount-1])
         ul.children[ul.childElementCount-2].firstChild.focus()
-        return
     }
 
-    // if use function from other => append bullet after self
-    element.parentElement.insertBefore(newBullet, element.nextSibling)
-    element.nextSibling.firstChild.focus()
+    if (element.firstChild.classList.contains("input-bullet")){
+        // if use function from other => append bullet after self
+        element.parentElement.insertBefore(newBullet, element.nextSibling)
+        element.nextSibling.firstChild.focus()
+    }
 }
 
 function bulletOnKeyDown(element,event){
