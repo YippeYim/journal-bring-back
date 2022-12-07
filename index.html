@@ -23,12 +23,12 @@
             <div class="add-bullet above" id="above-space"></div>
             <li class="add-bullet above" id="above-bullet">click to add new bullet above</li>
 
-            <li><input type="text" class="input-bullet" onkeydown="bulletOnKeyDown(this,event)"></li>
+            <li><input type="text" class="input-bullet" onkeydown="bulletOnKeyDown(this,event)" onkeyup="bulletOnKeyUp(this,event)"></li>
 
             <li class="add-bullet bottom" id="bottom-bullet">
                 click to add new bullet below 
                 <!-- I don't know way it doesn't work like above so I made this -->
-                <div class="add-bullet" id="bottom-space"><div></div></div>
+                <div class="add-bullet" id="bottom-space"><div id="just-add-it-to-skip-bug-fixing-i'msorry"></div></div>
             </li>
         </ul>
     </div>
