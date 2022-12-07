@@ -16,14 +16,11 @@ function addBullet(element){
         // add bullet above
         ul.insertBefore(newBullet, ul.children[2])
         ul.children[2].firstChild.focus()
-    }
-    if (element.classList.contains("bottom")){
+    }else if (element.classList.contains("bottom")){
         // add bullet above
         ul.insertBefore(newBullet, ul.children[ul.childElementCount-1])
         ul.children[ul.childElementCount-2].firstChild.focus()
-    }
-
-    if (element.firstChild.classList.contains("input-bullet")){
+    }else if (element.firstChild.classList.contains("input-bullet")){
         // if use function from other => append bullet after self
         element.parentElement.insertBefore(newBullet, element.nextSibling)
         element.nextSibling.firstChild.focus()
@@ -31,6 +28,7 @@ function addBullet(element){
 }
 
 function bulletOnKeyDown(element,event){
+    console.log(event.key)
     if (event.key=="Enter"){
         // add new bullet after this
         addBullet(element.parentElement)
