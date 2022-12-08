@@ -31,6 +31,8 @@ function deleteThisBullet(bulletInput){
     let bulletLi = bulletInput.parentElement
     // if have only 1 bullet left => return
     if (bulletLi.parentElement.childElementCount==4) return
+        // spacific case (note bullet)
+    if (bulletLi.parentElement.childElementCount==1) return
 
     // move cursor to other bullet
     let direction = "up"
@@ -42,11 +44,50 @@ function deleteThisBullet(bulletInput){
     // remove this bullet
     bulletLi.parentElement.removeChild(bulletLi)
 }
+function moveCursorOnNoteBullet(bulletInput,dest){
+    if(dest=="down" ){
+        // skip if is last child
+        if (!(bulletInput.parentElement==bulletInput.parentElement.parentElement.lastElementChild)){
+            bulletInput.parentElement.nextElementSibling.firstChild.focus()
+        }else{
+            // if is last go on normal bullet
+            moveCursorOnBullet(bulletInput.parentElement.parentElement,"down")
+        }
+    }
+    if(dest=="up"){
+        // skip if is first child
+        if (!(bulletInput.parentElement==bulletInput.parentElement.parentElement.firstElementChild)){
+            bulletInput.parentElement.previousElementSibling.firstChild.focus()
+        }else{
+            // if is last go on normal bullet
+            moveCursorOnBullet(bulletInput.parentElement.parentElement,"up")
+        }
+    }
+}
+
 function moveCursorOnBullet(bulletInput, dest){
+    // spacific case (note bullet)
+    if (bulletInput.parentElement.parentElement.classList.contains("note-container")){
+        moveCursorOnNoteBullet(bulletInput, dest)
+        return
+    }
+
     if(dest=="down" && !bulletInput.parentElement.nextElementSibling.matches(".add-bullet")){
+        // if below bullet is note-container
+        if (bulletInput.parentElement.nextElementSibling.firstElementChild.matches(".note-container")){
+            bulletInput.parentElement.nextElementSibling.firstElementChild.firstElementChild.firstElementChild.focus()
+            return
+        }
+
         bulletInput.parentElement.nextElementSibling.firstChild.focus()
     }
     if(dest=="up" && !bulletInput.parentElement.previousElementSibling.matches(".add-bullet")){
+        // if bullet on top is note-container
+        if (bulletInput.parentElement.previousElementSibling.firstElementChild.matches(".note-container")){
+            bulletInput.parentElement.previousElementSibling.firstElementChild.lastElementChild.firstElementChild.focus()
+            return
+        }
+
         bulletInput.parentElement.previousElementSibling.firstChild.focus()
     }
 
@@ -54,11 +95,13 @@ function moveCursorOnBullet(bulletInput, dest){
 
 var waitForCommand = false
 var command = ""
+
 function clearCommand(bulletInput){
     bulletInput.value = bulletInput.saveText
     waitForCommand = false
     command =""
 }
+
 function bulletOnKeyDown(element,event){
     // console.log(event.key)
     if (event.key=="Enter"){
