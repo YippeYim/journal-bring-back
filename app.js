@@ -52,12 +52,34 @@ function moveCursorOnBullet(bulletInput, dest){
 
 }
 
+var waitForCommand = false
+var command = ""
+function clearCommand(bulletInput){
+    bulletInput.value = bulletInput.saveText
+    waitForCommand = false
+    command =""
+}
 function bulletOnKeyDown(element,event){
     // console.log(event.key)
     if (event.key=="Enter"){
+        // while getting command
+        if (waitForCommand){
+            // console.log(command)
+            clearCommand(element)
+            return
+        }
+
         // add new bullet after this
         addBullet(element.parentElement)
     }
+    // get command from typing
+    if (waitForCommand){
+        if (event.key.length==1){
+            command += event.key
+        }
+        return
+    }
+
     if (event.key=="ArrowDown"){
         // cursor down
         moveCursorOnBullet(element,"down")
@@ -66,9 +88,22 @@ function bulletOnKeyDown(element,event){
         // cursor up
         moveCursorOnBullet(element,"up")
     }
+    if (event.key=="/"){
+        element.saveText = element.value
+        waitForCommand = true
+    }
 }
 function bulletOnKeyUp(element,event){
     if (event.key=="Backspace"){
+
+        if (waitForCommand){
+            command = command.slice(0,-1)
+            if (command.length==0){
+                clearCommand(element)
+            }
+            return
+        }
+
         // if bullet empty => remove this bullet
         if (element.value==""){
             deleteThisBullet(element)
