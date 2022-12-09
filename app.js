@@ -27,6 +27,10 @@ function addBullet(elementLi){
     }
 }
 function addNoteBullet(elementLi){
+    if (elementLi.parentElement.matches(".note-container")){
+        alert("Sorry, you can't make note bullet inside note bulelt")
+        return
+    }
     if (elementLi.firstElementChild.saveText.length<1){
         alert("Please type note's title before make note => <title/note>")
         return
