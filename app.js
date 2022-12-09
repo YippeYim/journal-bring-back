@@ -39,10 +39,15 @@ function addNoteBullet(elementLi){
 function deleteThisBullet(bulletInput){
     let bulletLi = bulletInput.parentElement
 
-    // if have only 1 bullet left => return
-    if (bulletLi.parentElement.childElementCount==4) return
-        // spacific case (note bullet)
-    if (bulletLi.parentElement.childElementCount==1) return
+    // (not note bullet) if have only 1 bullet left => return
+    if (bulletLi.parentElement.childElementCount==4 && !(bulletInput.parentElement.parentElement.matches(".note-container"))) return
+
+    // (for note bullet) if have only 1 bullet left => remove note-container
+    if (bulletLi.parentElement.childElementCount==1){
+        moveCursorOnBullet(bulletLi.firstElementChild,"up")
+        let noteUl = bulletLi.parentElement
+        noteUl.parentElement.parentElement.removeChild(noteUl.parentElement)
+    }
 
     // move cursor to other bullet
     let direction = "up"
