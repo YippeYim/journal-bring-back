@@ -28,7 +28,7 @@ function addBullet(elementLi){
 }
 function addNoteBullet(elementLi){
     if (elementLi.firstElementChild.saveText.length<1){
-        alert("Please type this note's title before make note => <title/note>")
+        alert("Please type note's title before make note => <title/note>")
         return
     }
     
@@ -55,6 +55,7 @@ function deleteThisBullet(bulletInput){
 
     // (for note bullet) if have only 1 bullet left => remove note-container
     if (bulletLi.parentElement.childElementCount==1){
+        if (!(confirm("<Delete note> Are you sure?"))) return
         moveCursorOnBullet(bulletLi.firstElementChild,"up")
         let noteUl = bulletLi.parentElement
         noteUl.parentElement.parentElement.removeChild(noteUl.parentElement)
@@ -129,6 +130,16 @@ function moveCursorOnBullet(bulletInput, dest){
     }
 
 }
+function renameNoteTitle(bulletLi){
+    const bulletLiLi = bulletLi.parentElement.parentElement
+    let save =bulletLiLi.firstElementChild
+
+    bulletLiLi.innerText = bulletLi.firstElementChild.saveText
+    bulletLiLi.appendChild(save)
+
+    bulletLi.firstElementChild.saveText=""
+    bulletLi.firstElementChild.focus()
+}
 
 var waitForCommand = false
 var command = ""
@@ -145,9 +156,13 @@ function bulletOnKeyDown(element,event){
         // while getting command
         if (waitForCommand){
             // console.log(command)
-            if (command = "note"){
+            if (command == "note"){
                 addNoteBullet(element.parentElement)
             }
+            if (command == "rename" && element.parentElement.parentElement.matches(".note-container")){
+                renameNoteTitle(element.parentElement)
+            }
+
             clearCommand(element)
             return
         }
@@ -194,10 +209,10 @@ function bulletOnKeyUp(element,event){
     }
 
 }
-function showValue(element){
-    console.log(element.innerText)
-    let save =element.firstElementChild
-    element.innerText += 1
-    element.appendChild(save)
-    console.log(element)
+function showValue(bulletLILI){
+    // console.log(bulletLILI.innerText)
+    let save =bulletLILI.firstElementChild
+    bulletLILI.innerText += 1
+    bulletLILI.appendChild(save)
+    // console.log(bulletLILI)
 }
