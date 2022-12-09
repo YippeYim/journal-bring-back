@@ -6,7 +6,7 @@
     --ndcolor: rgb(192, 131, 131);
 }
 *{
-    border:1px solid red;
+    border:0px solid red;
 }
 body{
     margin:0px;
@@ -114,7 +114,7 @@ li:has(.input-bullet:focus){
     list-style: circle;
 }
 .note-container{
-    background-color:blue;
+    /* background-color:blue; */
 }
 
 

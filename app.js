@@ -40,12 +40,9 @@ function addNoteBullet(elementLi){
 
     elementLi.parentElement.insertBefore(newBullet, elementLi.nextSibling)
 
-    moveCursorOnBullet(elementLi.firstElementChild,"down")
-    
     deleteThisBullet(elementLi.firstElementChild)
 
-    
-    
+    moveCursorOnBullet(document.activeElement,"down")
 }
 function deleteThisBullet(bulletInput){
     let bulletLi = bulletInput.parentElement
@@ -208,11 +205,4 @@ function bulletOnKeyUp(element,event){
         }
     }
 
-}
-function showValue(bulletLILI){
-    // console.log(bulletLILI.innerText)
-    let save =bulletLILI.firstElementChild
-    bulletLILI.innerText += 1
-    bulletLILI.appendChild(save)
-    // console.log(bulletLILI)
 }
