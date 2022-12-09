@@ -8,25 +8,34 @@ for(let i=0;i<addBtnElements.length;i++){
 
 const ul = document.getElementById("bullet-list")
 
-function addBullet(element){
+function addBullet(elementLi){
     const newBullet = document.createElement("li")
     newBullet.innerHTML = "<input type='text' class='input-bullet' onkeydown='bulletOnKeyDown(this,event)' onkeyup='bulletOnKeyUp(this,event)'>"
 
-    if (element.classList.contains("above")){
+    if (elementLi.classList.contains("above")){
         // add bullet above
         ul.insertBefore(newBullet, ul.children[2])
         ul.children[2].firstChild.focus()
-    }else if (element.classList.contains("bottom")){
+    }else if (elementLi.classList.contains("bottom")){
         // add bullet above
         ul.insertBefore(newBullet, ul.children[ul.childElementCount-1])
         ul.children[ul.childElementCount-2].firstChild.focus()
-    }else if (element.firstChild.classList.contains("input-bullet")){
+    }else if (elementLi.firstChild.classList.contains("input-bullet")){
         // if use function from other => append bullet after self
-        element.parentElement.insertBefore(newBullet, element.nextSibling)
-        element.nextSibling.firstChild.focus()
+        elementLi.parentElement.insertBefore(newBullet, elementLi.nextSibling)
+        elementLi.nextSibling.firstChild.focus()
     }
 }
+function addNoteBullet(elementLi){
+    const newBullet = document.createElement("li")
+    newBullet.innerHTML = "<ul class='note-container'><li><input type='text' class='input-bullet' onkeydown='bulletOnKeyDown(this,event)' onkeyup='bulletOnKeyUp(this,event)'></li></ul>"
+    
+    elementLi.parentElement.insertBefore(newBullet, elementLi.nextSibling)
+    moveCursorOnBullet(elementLi.firstElementChild,"down")
 
+    deleteThisBullet(elementLi.firstElementChild)
+    
+}
 function deleteThisBullet(bulletInput){
     let bulletLi = bulletInput.parentElement
 
@@ -115,6 +124,9 @@ function bulletOnKeyDown(element,event){
         // while getting command
         if (waitForCommand){
             // console.log(command)
+            if (command = "note"){
+                addNoteBullet(element.parentElement)
+            }
             clearCommand(element)
             return
         }
