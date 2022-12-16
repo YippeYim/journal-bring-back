@@ -144,6 +144,8 @@ function renameNoteTitle(bulletLi){
 
 var waitForCommand = false
 var command = ""
+var waitForFeel = false
+var todayFeel = []
 
 function clearCommand(bulletInput){
     bulletInput.value = bulletInput.saveText
@@ -162,6 +164,12 @@ function bulletOnKeyDown(element,event){
             }
             if (command == "rename" && element.parentElement.parentElement.matches(".note-container")){
                 renameNoteTitle(element.parentElement)
+            }
+            if (command.slice(0,4)=="feel"){
+                let feel = command.slice(4,command.length)    
+                feel = feel.trim()
+                todayFeel.push(feel)
+                console.log(todayFeel)
             }
 
             clearCommand(element)
