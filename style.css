@@ -50,7 +50,6 @@ nav{
     margin-top:40px;
     /* width:var(--title-width); */
     width:550px;
-    /* border:1px solid red; */
     display:flex;
     flex-direction: column;
 }
@@ -70,6 +69,10 @@ li:hover{
 li:not(.add-bullet){
     color:var(--stcolor);
     font-size:25px;
+}
+#bullet-list{
+    border-bottom:1px solid var(--stcolor);
+
 }
 .underline{
     border-bottom:2px solid blue;
