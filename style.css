@@ -46,7 +46,7 @@ nav{
 }
 .setting:active,
 .close-cloud:active,
-.menu-btn:active{
+.page-menu .menu-btn:active{
     transform: scale(0.9);
 }
 
@@ -56,9 +56,9 @@ nav{
     position:fixed;
     top:20px;
     right:10px;
-    border:1px solid red;
-    width:15vw;
-    /* height: 500px; */
+    /* border:1px solid red; */
+    /* width:15vw; */
+    width:0%;
     height:auto;
     /* height:0; */
     background-color:gray;
@@ -66,13 +66,16 @@ nav{
     transition: all 0.5s ease;
 
 }
-.menu-cloud > .menu > .menu-btn{
+.menu-btn{
     background-color:white;
     border-radius:5px;
     margin:10px;
     padding:5px;
     padding-left:15px;
-    height:30px;
+    height:fit-content;
+
+    display:flex; 
+    gap:10px;
 }
 
 .menu-btn:hover{
@@ -81,16 +84,21 @@ nav{
     -moz-box-shadow: 7px 8px 24px -10px rgba(0,0,0,0.62);
 }
 
+.page-custom-feelings input{
+    border-bottom:1px solid var(--stcolor);
+    width:90px;
+}
+
 #to-right-corner{
     display:flex;
     justify-content: end;
 }
-.menu-cloud .close-cloud{
+.menu-cloud .menu-icon{
     width:70px;
+    /* height:70px; */
     border:0px solid blue;
     margin-right:10px;
     transition:height 0.5s ease-in-out;
-    
 }
 
 .journal-box{

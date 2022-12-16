@@ -14,14 +14,27 @@
     </nav>
 
     <div class="menu-cloud">
-        <div id="to-right-corner">
-            <img onclick="closeMenuCloud()" class="close-cloud" src="/asset/menu-cross.svg" >
+        <div class="page page-menu">
+            <div id="to-right-corner">
+                <img class="menu-icon" src="/asset/menu-cross.svg" >
+            </div>
+            <div class="menu">
+                <div class="menu-btn">Login</div>
+                <div class="menu-btn" id="custom-feelings">Custom feelings</div>
+                <div class="menu-btn">Theme</div>
+            </div>
         </div>
-        <div class="menu">
-            <div class="menu-btn">Login</div>
-            <div class="menu-btn">Custom feelings</div>
-            <div class="menu-btn">Theme</div>
-
+        <div class="page page-custom-feelings">
+            <div id="to-right-corner">
+                <img class="menu-icon back-icon" src="/asset/menu-back.svg" >
+            </div>
+            <div class="menu">
+                <div class="menu-btn">
+                    <button>emo</button><input type="text" placeholder="type here" maxlength="20">
+                </div>
+                <div class="menu-btn">test2</div>
+                <div class="menu-btn">test3</div>
+            </div>
         </div>
     </div>
 
@@ -58,22 +71,6 @@
 
     <script src="app.js"></script>
     <!-- for menu cloud -->
-    <script>
-        const menuCloud = document.getElementsByClassName("menu-cloud")[0];
-        const cross = document.getElementsByClassName("close-cloud")[0];
-        const burger = document.getElementsByClassName("setting")[0]
-
-        function openMenuCloud(){
-            menuCloud.style.width="15vw"
-            cross.style.height="70px"
-            burger.style.height="0px"
-        }
-        function closeMenuCloud(){
-            menuCloud.style.width="0%"
-            cross.style.height="0px"
-            burger.style.height="50px"
-        }
-
-    </script>
+    <script src="/cloud.js"></script>
 </body>
 </html>
