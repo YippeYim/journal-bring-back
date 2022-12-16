@@ -147,6 +147,30 @@ var command = ""
 var waitForFeel = false
 var todayFeel = []
 
+
+const feelingsBox = document.getElementsByClassName("feelings-box")[0]
+function clearFeelingsBox(){
+    feelingsBox.innerHTML = ""
+}
+function drawTodayFeel(){
+    clearFeelingsBox()
+
+    for (i=0;i<todayFeel.length;i++){
+        let newSpan = document.createElement("span")
+        newSpan.innerText = todayFeel[i]
+        feelingsBox.appendChild(newSpan)
+    }
+}
+
+window.addEventListener("load",()=>{
+    if (localStorage.getItem("todayFeel")===null){
+        localStorage.setItem("todayFeel","[]")
+    }    
+    todayFeel = JSON.parse(localStorage.getItem("todayFeel"))
+    drawTodayFeel()
+})
+
+
 function clearCommand(bulletInput){
     bulletInput.value = bulletInput.saveText
     waitForCommand = false
@@ -168,8 +192,19 @@ function bulletOnKeyDown(element,event){
             if (command.slice(0,4)=="feel"){
                 let feel = command.slice(4,command.length)    
                 feel = feel.trim()
-                todayFeel.push(feel)
-                console.log(todayFeel)
+                if (todayFeel.indexOf(feel)== -1){
+                    todayFeel.push(feel)
+                    console.log(todayFeel)
+                    console.log(localStorage.getItem("todayFeel"))
+                }else{
+                    if (confirm("Do you want to remove <"+feel+"> from today feelings list?")){
+                        todayFeel.splice(todayFeel.indexOf(feel),1)
+                    }
+                }
+
+                localStorage.setItem("todayFeel",JSON.stringify(todayFeel))
+                drawTodayFeel()
+
             }
 
             clearCommand(element)
