@@ -10,8 +10,20 @@
 <body>
     <nav>
         <img class="logo" src="icon.png" >
-        <img class="setting" src="/asset/menu-burger.svg" >
+        <img onclick="openMenuCloud()" class="setting" src="/asset/menu-burger.svg" >
     </nav>
+
+    <div class="menu-cloud">
+        <div id="to-right-corner">
+            <img onclick="closeMenuCloud()" class="close-cloud" src="/asset/menu-cross.svg" >
+        </div>
+        <div class="menu">
+            <div class="menu-btn">Login</div>
+            <div class="menu-btn">Custom feelings</div>
+            <div class="menu-btn">Theme</div>
+
+        </div>
+    </div>
 
 
     <div class="journal-box">
@@ -45,5 +57,23 @@
     </div>
 
     <script src="app.js"></script>
+    <!-- for menu cloud -->
+    <script>
+        const menuCloud = document.getElementsByClassName("menu-cloud")[0];
+        const cross = document.getElementsByClassName("close-cloud")[0];
+        const burger = document.getElementsByClassName("setting")[0]
+
+        function openMenuCloud(){
+            menuCloud.style.width="15vw"
+            cross.style.height="70px"
+            burger.style.height="0px"
+        }
+        function closeMenuCloud(){
+            menuCloud.style.width="0%"
+            cross.style.height="0px"
+            burger.style.height="50px"
+        }
+
+    </script>
 </body>
 </html>

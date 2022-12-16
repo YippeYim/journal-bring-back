@@ -37,13 +37,62 @@ nav{
 .setting{
     width:50px;
     height:50px;
+    transition:height 0.3s ease
 }
-.setting:hover, .logo:hover{
+.setting:hover,
+.logo:hover,
+.close-cloud:hover{
     transform:scale(1.1)
 }
-.setting:active{
+.setting:active,
+.close-cloud:active,
+.menu-btn:active{
     transform: scale(0.9);
 }
+
+.menu-cloud{
+    display:flex;
+    flex-direction:column;
+    position:fixed;
+    top:20px;
+    right:10px;
+    border:1px solid red;
+    width:15vw;
+    /* height: 500px; */
+    height:auto;
+    /* height:0; */
+    background-color:gray;
+    border-radius:15px;
+    transition: all 0.5s ease;
+
+}
+.menu-cloud > .menu > .menu-btn{
+    background-color:white;
+    border-radius:5px;
+    margin:10px;
+    padding:5px;
+    padding-left:15px;
+    height:30px;
+}
+
+.menu-btn:hover{
+    box-shadow: 7px 8px 24px -10px rgba(0,0,0,0.62);
+    -webkit-box-shadow: 7px 8px 24px -10px rgba(0,0,0,0.62);
+    -moz-box-shadow: 7px 8px 24px -10px rgba(0,0,0,0.62);
+}
+
+#to-right-corner{
+    display:flex;
+    justify-content: end;
+}
+.menu-cloud .close-cloud{
+    width:70px;
+    border:0px solid blue;
+    margin-right:10px;
+    transition:height 0.5s ease-in-out;
+    
+}
+
 .journal-box{
     /* border:1px solid blue; */
     z-index:2;
@@ -117,9 +166,9 @@ input{
 li:has(.input-bullet:focus){
     list-style: circle;
 }
-.note-container{
-    /* background-color:blue; */
-}
+/* .note-container{
+    background-color:blue;
+} */
 
 
 #above-space{
