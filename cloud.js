@@ -113,3 +113,5 @@ function drawCustomFeelingsBtn(){
     }
 
 }
+
+pageCustomFeelings.children[1].addEventListener("focusout",saveCustomFeelings)
