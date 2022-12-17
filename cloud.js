@@ -30,6 +30,8 @@ function goCustomFeelingsPage(){
     pageMenu.style.display="none"
     pageCustomFeelings.style.display="block"
     backButton[0].style.height="70px"
+
+    drawCustomFeelingsBtn()
 }
 
 for (i=0;i<backButton.length;i++){
@@ -49,9 +51,65 @@ function goMenuPage(){
     closeAllPage()
     pageMenu.style.display="block"
     cross.style.height="70px"
+
+    saveCustomFeelings()
 }
 
 window.addEventListener("load",()=>{
     goMenuPage()
     closeMenuCloud()
 })
+
+function saveCustomFeelings(){
+    // let allCustomFeelings = {}
+    let allCustomFeelings = JSON.parse(localStorage.getItem("customFeelings"))
+    let page = pageCustomFeelings
+    for (i=0;i<page.children[1].childElementCount-1;i++){
+        let original = page.children[1].children[i].firstElementChild.value
+        let represent = page.children[1].children[i].lastElementChild.value
+
+        if (original.trim()==="" || represent.trim()==="") continue
+    
+        // allCustomFeelings.push([original,represent])
+        allCustomFeelings[original] = represent
+    }
+    
+    localStorage.setItem("customFeelings",JSON.stringify(allCustomFeelings))
+}
+
+function addNewCustomFeelingsInput(thisBtn){
+    let newDivInput = document.createElement("div")
+    newDivInput.classList.add("menu-btn")
+    newDivInput.innerHTML = `<input class="short-input" type="text" maxLength="20" placeholder="original..">  <input class="long-input" type="text" placeholder="represent to..." maxlength="20">`
+
+    thisBtn.parentElement.insertBefore(newDivInput,thisBtn)
+}
+
+pageCustomFeelings.children[1].lastElementChild.addEventListener('click',()=>{
+    addNewCustomFeelingsInput(pageCustomFeelings.children[1].lastElementChild)
+})
+
+function removeAllCustomFeelingsBtn(){
+    let addBtn = pageCustomFeelings.children[1].lastElementChild
+    pageCustomFeelings.children[1].innerHTML = ""
+
+    pageCustomFeelings.children[1].appendChild(addBtn)
+}
+
+function drawCustomFeelingsBtn(){
+    removeAllCustomFeelingsBtn()
+
+    let allCustomFeelings = JSON.parse(localStorage.getItem("customFeelings"))
+
+    for (key in allCustomFeelings){
+        let newDivInput = document.createElement("div")
+        newDivInput.classList.add("menu-btn")
+        newDivInput.innerHTML = `<input class="short-input" type="text" maxLength="20" placeholder="original..">  <input class="long-input" type="text" placeholder="represent to..." maxlength="20">`
+        newDivInput.children[0].value = key
+        newDivInput.children[1].value = allCustomFeelings[key]
+
+        let menuList = pageCustomFeelings.children[1]
+        menuList.insertBefore(newDivInput,menuList.lastElementChild)
+    }
+
+}

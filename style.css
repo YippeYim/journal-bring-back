@@ -41,12 +41,14 @@ nav{
 }
 .setting:hover,
 .logo:hover,
-.close-cloud:hover{
+.close-cloud:hover,
+.plus-btn:hover{
     transform:scale(1.1)
 }
 .setting:active,
 .close-cloud:active,
-.page-menu .menu-btn:active{
+.page-menu .menu-btn:active
+.plus-btn:active{
     transform: scale(0.9);
 }
 
@@ -87,6 +89,14 @@ nav{
 .page-custom-feelings input{
     border-bottom:1px solid var(--stcolor);
     width:90px;
+}
+
+.page-custom-feelings input:focus{
+    outline: none;
+}
+
+.page-custom-feelings .short-input{
+    width:80px;
 }
 
 #to-right-corner{
