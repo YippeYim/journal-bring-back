@@ -154,10 +154,20 @@ function clearFeelingsBox(){
 }
 function drawTodayFeel(){
     clearFeelingsBox()
+    const allCustomFeelings = JSON.parse(localStorage.getItem("customFeelings"))
 
     for (i=0;i<todayFeel.length;i++){
         let newSpan = document.createElement("span")
+        newSpan.classList.add("todayfeeling")
         newSpan.innerText = todayFeel[i]
+        let onHoverTitle = todayFeel[i]
+        if (allCustomFeelings[todayFeel[i]] != undefined){
+            newSpan.classList.add("short-form")
+            newSpan.innerText = allCustomFeelings[todayFeel[i]]
+            onHoverTitle = todayFeel[i]
+        }
+
+        newSpan.setAttribute("title",onHoverTitle)
         feelingsBox.appendChild(newSpan)
     }
 }

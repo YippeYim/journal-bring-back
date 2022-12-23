@@ -59,7 +59,6 @@ window.addEventListener("load",()=>{
     closeMenuCloud()
 })
 
-// todo: if feeling is missing => delete that in localstorage
 function saveCustomFeelings(){
     let inputFeelings = {}
     let page = pageCustomFeelings
@@ -73,6 +72,8 @@ function saveCustomFeelings(){
     }
 
     localStorage.setItem("customFeelings",JSON.stringify(inputFeelings))
+
+    drawTodayFeel()
 }
 
 function addNewCustomFeelingsInput(thisBtn){
