@@ -52,7 +52,6 @@ function goMenuPage(){
     pageMenu.style.display="block"
     cross.style.height="70px"
 
-    saveCustomFeelings()
 }
 
 window.addEventListener("load",()=>{
@@ -60,9 +59,9 @@ window.addEventListener("load",()=>{
     closeMenuCloud()
 })
 
+// todo: if feeling is missing => delete that in localstorage
 function saveCustomFeelings(){
-    // let allCustomFeelings = {}
-    let allCustomFeelings = JSON.parse(localStorage.getItem("customFeelings"))
+    let inputFeelings = {}
     let page = pageCustomFeelings
     for (i=0;i<page.children[1].childElementCount-1;i++){
         let original = page.children[1].children[i].firstElementChild.value
@@ -70,17 +69,16 @@ function saveCustomFeelings(){
 
         if (original.trim()==="" || represent.trim()==="") continue
     
-        // allCustomFeelings.push([original,represent])
-        allCustomFeelings[original] = represent
+        inputFeelings[original] = represent
     }
-    
-    localStorage.setItem("customFeelings",JSON.stringify(allCustomFeelings))
+
+    localStorage.setItem("customFeelings",JSON.stringify(inputFeelings))
 }
 
 function addNewCustomFeelingsInput(thisBtn){
     let newDivInput = document.createElement("div")
     newDivInput.classList.add("menu-btn")
-    newDivInput.innerHTML = `<input class="short-input" type="text" maxLength="20" placeholder="original..">  <input class="long-input" type="text" placeholder="represent to..." maxlength="20">`
+    newDivInput.innerHTML = `<input class="short-input" type="text" maxLength="20" placeholder="original..">  <input class="long-input" type="text" placeholder="short form..." maxlength="20">`
 
     thisBtn.parentElement.insertBefore(newDivInput,thisBtn)
 }
