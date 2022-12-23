@@ -249,21 +249,22 @@ function bulletOnKeyDown(elementInput,event){
                     clearCommand(elementInput)
                     return
                 }
-                if (todayFeel.indexOf(feel)== -1){
-                    todayFeel.push(feel)
-                    // console.log(todayFeel)
-                    // console.log(localStorage.getItem("todayFeel"))
-                }else{
-                    if (confirm("Do you want to remove <"+feel+"> from today feelings list?")){
-                        todayFeel.splice(todayFeel.indexOf(feel),1)
+                else{
+                    if (todayFeel.indexOf(feel)== -1){
+                        todayFeel.push(feel)
+                        // console.log(todayFeel)
+                        // console.log(localStorage.getItem("todayFeel"))
+                    }else{
+                        if (confirm("Do you want to remove <"+feel+"> from today feelings list?")){
+                            todayFeel.splice(todayFeel.indexOf(feel),1)
+                        }
                     }
+
+                    localStorage.setItem("todayFeel",JSON.stringify(todayFeel))
+                    drawTodayFeel()
                 }
-
-                localStorage.setItem("todayFeel",JSON.stringify(todayFeel))
-                drawTodayFeel()
-
             }
-
+            
             clearCommand(elementInput)
             return
         }
