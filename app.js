@@ -40,13 +40,15 @@ function addNoteBullet(elementLi){
     const title = elementLi.firstElementChild.saveText
 
     newBullet.innerHTML = title + "<ul class='note-container'><li><input type='text' class='input-bullet' onkeydown='bulletOnKeyDown(this,event)' onkeyup='bulletOnKeyUp(this,event)'></li></ul>"
-    
 
     elementLi.parentElement.insertBefore(newBullet, elementLi.nextSibling)
 
     deleteThisBullet(elementLi.firstElementChild)
 
     moveCursorOnBullet(document.activeElement,"down")
+
+    document.activeElement.parentElement.parentElement.parentElement.noteTitle = title
+    console.log( document.activeElement.parentElement.parentElement.parentElement.noteTitle )
 }
 function deleteThisBullet(bulletInput){
     let bulletLi = bulletInput.parentElement
@@ -131,11 +133,32 @@ function moveCursorOnBullet(bulletInput, dest){
     }
 
 }
-function renameNoteTitle(bulletLi){
+function renameNoteTitle(bulletLi,isAfterAddFeeling=false){
     const bulletLiLi = bulletLi.parentElement.parentElement
     let save =bulletLiLi.firstElementChild
 
-    bulletLiLi.innerText = bulletLi.firstElementChild.saveText
+    let noteFeelings = ""
+
+    if (isAfterAddFeeling){ 
+        noteFeelings = "["
+
+        for (i=0;i<bulletLi.parentElement.feelings.length;i++){
+            noteFeelings += bulletLi.parentElement.feelings[i]
+            if (i!=bulletLi.parentElement.feelings.length-1){
+                noteFeelings += ","
+            }else{
+                noteFeelings += "]"
+            }
+        }
+        if (noteFeelings.length==1){
+            noteFeelings =""
+        }
+    }else{
+        bulletLiLi.noteTitle = bulletLi.firstElementChild.saveText
+        // console.log("renamed")
+        alert("feelling added to note")
+    }
+    bulletLiLi.innerText = (bulletLiLi.noteTitle + "  " + noteFeelings)
     bulletLiLi.appendChild(save)
 
     bulletLi.firstElementChild.saveText=""
@@ -152,6 +175,8 @@ const feelingsBox = document.getElementsByClassName("feelings-box")[0]
 function clearFeelingsBox(){
     feelingsBox.innerHTML = ""
 }
+
+// todo: add feeling to note bullet
 function drawTodayFeel(){
     clearFeelingsBox()
     const allCustomFeelings = JSON.parse(localStorage.getItem("customFeelings"))
@@ -187,25 +212,47 @@ function clearCommand(bulletInput){
     command =""
 }
 
-function bulletOnKeyDown(element,event){
+function bulletOnKeyDown(elementInput,event){
     // console.log(event.key)
     if (event.key=="Enter"){
         // while getting command
         if (waitForCommand){
             // console.log(command)
             if (command == "note"){
-                addNoteBullet(element.parentElement)
+                addNoteBullet(elementInput.parentElement)
             }
-            if (command == "rename" && element.parentElement.parentElement.matches(".note-container")){
-                renameNoteTitle(element.parentElement)
+            if (command == "rename" && elementInput.parentElement.parentElement.matches(".note-container")){
+                renameNoteTitle(elementInput.parentElement)
             }
             if (command.slice(0,4)=="feel"){
                 let feel = command.slice(4,command.length)    
                 feel = feel.trim()
+                if (elementInput.parentElement.parentElement.matches(".note-container")){
+                    let noteFeelings = elementInput.parentElement.parentElement.feelings
+                    // for first time adding feeling
+                    if (noteFeelings===undefined){
+                        noteFeelings = []
+                    }
+
+                    
+                    if (noteFeelings.indexOf(feel)== -1){
+                        noteFeelings.push(feel)
+                    }else{
+                        if (confirm("Do you want to remove <"+feel+"> from note feelings")){
+                            noteFeelings.splice(noteFeelings.indexOf(feel),1)
+                        }
+                    }
+                    elementInput.parentElement.parentElement.feelings = noteFeelings
+
+                    renameNoteTitle(elementInput.parentElement,true)
+
+                    clearCommand(elementInput)
+                    return
+                }
                 if (todayFeel.indexOf(feel)== -1){
                     todayFeel.push(feel)
-                    console.log(todayFeel)
-                    console.log(localStorage.getItem("todayFeel"))
+                    // console.log(todayFeel)
+                    // console.log(localStorage.getItem("todayFeel"))
                 }else{
                     if (confirm("Do you want to remove <"+feel+"> from today feelings list?")){
                         todayFeel.splice(todayFeel.indexOf(feel),1)
@@ -217,12 +264,12 @@ function bulletOnKeyDown(element,event){
 
             }
 
-            clearCommand(element)
+            clearCommand(elementInput)
             return
         }
 
         // add new bullet after this
-        addBullet(element.parentElement)
+        addBullet(elementInput.parentElement)
     }
     // get command from typing
     if (waitForCommand){
@@ -234,14 +281,14 @@ function bulletOnKeyDown(element,event){
 
     if (event.key=="ArrowDown"){
         // cursor down
-        moveCursorOnBullet(element,"down")
+        moveCursorOnBullet(elementInput,"down")
     }
     if (event.key=="ArrowUp"){
         // cursor up
-        moveCursorOnBullet(element,"up")
+        moveCursorOnBullet(elementInput,"up")
     }
     if (event.key=="/"){
-        element.saveText = element.value
+        elementInput.saveText = elementInput.value
         waitForCommand = true
     }
 }
