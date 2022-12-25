@@ -1,6 +1,16 @@
 const date = new Date()
 const bulletList = document.getElementById("bullet-list")
 
+let todayDate = {
+    date: `${date.getDate()}/${ date.getMonth()+1 }/${ date.getFullYear() }`,
+    setDate(newDate){
+        this.date = newDate
+    },
+    getDate(){
+        return this.date
+    },
+}
+
 function loadBulletValue(){
     console.log(bulletList.children)
     let title = document.getElementById("input-title").value
@@ -46,30 +56,28 @@ function loadBulletValue(){
         }
         
     }
-    // console.log(title)
-    // console.log(allBulletValue)
+    
+
     let todayPageData = {
         title:title,
-        date:`${date.getDate()}/${ date.getMonth()+1 }/${ date.getFullYear() }`,
+        date: todayDate.getDate(),
         allBulletValue:allBulletValue
     }
     console.log(todayPageData)
     console.log(allNoteBullet)
 
 
-    let todayDate = `${date.getDate()}/${ date.getMonth()+1 }/${ date.getFullYear() }`
-    let tosave = {}
-    // * not have to load just set new one instand
 
-    let noteBulletData = {}
-    // todo: load noteBulletData form localStorage
+    // load old data to add new data
+    let oldData = JSON.parse(localStorage.getItem("journalData"))
+    let noteBulletData = JSON.parse(localStorage.getItem("noteBulletData"))
 
-    noteBulletData[todayDate] = allNoteBullet
-    tosave[todayDate] = todayPageData
-    localStorage.setItem("journalData",JSON.stringify(tosave))
+    noteBulletData[todayDate.getDate()] = allNoteBullet
+    oldData[todayDate.getDate()] = todayPageData
+    localStorage.setItem("journalData",JSON.stringify(oldData))
     localStorage.setItem("noteBulletData",JSON.stringify(noteBulletData))
 }
 let data = JSON.parse(localStorage.getItem("journalData"))
 let ndata = JSON.parse(localStorage.getItem("noteBulletData"))
-console.log(data)
-console.log(ndata)
+console.log(data[todayDate.getDate()])
+console.log(ndata[todayDate.getDate()])
