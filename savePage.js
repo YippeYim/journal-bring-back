@@ -11,7 +11,7 @@ let todayDate = {
     },
 }
 
-function loadBulletValue(){
+function savePageValue(){
     console.log(bulletList.children)
     let title = document.getElementById("input-title").value
     const allBulletValue = []
@@ -19,15 +19,15 @@ function loadBulletValue(){
 
     for (i=0;i<bulletList.childElementCount;i++){
         let bulletFirstChild = bulletList.children[i].firstElementChild
-        console.log(i)
+        // console.log(i)
 
         if (bulletList.children[i].matches(".add-bullet")){
-            console.log("skiped")
+            // console.log("skiped")
             continue
         }
 
         if (bulletFirstChild.matches(".input-bullet")){
-            console.log("add")
+            // console.log("add")
             allBulletValue.push(bulletFirstChild.value)
             continue
         }
@@ -81,3 +81,11 @@ let data = JSON.parse(localStorage.getItem("journalData"))
 let ndata = JSON.parse(localStorage.getItem("noteBulletData"))
 console.log(data[todayDate.getDate()])
 console.log(ndata[todayDate.getDate()])
+
+let sveBtn = document.getElementsByClassName("save-btn")[0]
+
+saveBtn.addEventListener("click",()=>{
+    savePageValue()
+    saveBtn.classList.remove("not-save")
+    saveBtn.classList.add("save")
+})

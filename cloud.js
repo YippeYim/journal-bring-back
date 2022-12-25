@@ -2,6 +2,7 @@ const menuCloud = document.getElementsByClassName("menu-cloud")[0];
 const menuIcon = document.getElementsByClassName("menu-icon")
 const cross = document.getElementsByClassName("menu-icon")[0];
 const burger = document.getElementsByClassName("setting")[0]
+// let saveBtn = document.getElementsByClassName("save-btn")[0]
 
 burger.addEventListener('click',openMenuCloud)
 cross.addEventListener('click',closeMenuCloud)
@@ -10,12 +11,14 @@ function openMenuCloud(){
     menuCloud.style.width="15vw"
     cross.style.height="70px"
     burger.style.height="0px"
+    saveBtn.style.right="-200px"
 }
 
 function closeMenuCloud(){
     menuCloud.style.width="0%"
     cross.style.height="0px"
     burger.style.height="70px"
+    saveBtn.style.right="0px"
 }
 
 const pageMenu = document.getElementsByClassName("page-menu")[0]

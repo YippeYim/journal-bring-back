@@ -52,6 +52,22 @@ nav{
     transform: scale(0.9);
 }
 
+.save-btn{
+    position:relative;
+    top:-60px;
+    /* right:100px; */
+    text-align: center;
+    width:70px;
+    height:40px;
+    border-radius:10px;
+}
+.not-save{
+    background-color: rgba(230, 64, 64, 0.788);
+}
+.save{
+    background-color : rgb(60, 201, 60);
+}
+
 .menu-cloud{
     display:flex;
     flex-direction:column;

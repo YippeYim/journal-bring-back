@@ -10,7 +10,11 @@
 <body>
     <nav>
         <img class="logo" src="icon.png" >
-        <img onclick="openMenuCloud()" class="setting" src="/asset/menu-burger.svg" >
+        <!-- <img onclick="openMenuCloud()" class="setting" src="/asset/menu-burger.svg" > -->
+        <div class="btn-wrapper" style="border:1px solid black;">
+            <button class="save-btn not-save">save</button>
+            <img onclick="openMenuCloud()" class="setting" src="/asset/menu-burger.svg" >
+        </div>
     </nav>
 
     <div class="menu-cloud">
@@ -54,7 +58,7 @@
             <li class="add-bullet above" id="above-bullet">click to add new bullet above</li>
 
             <li><input type="text" class="input-bullet" onkeydown="bulletOnKeyDown(this,event)" onkeyup="bulletOnKeyUp(this,event)"></li>
-            <!-- <li onclick="showValue(this)">title
+            <!-- <li>title
                 <ul class="note-container">
                     <li><input type="text" class="input-bullet" onkeydown="bulletOnKeyDown(this,event)" onkeyup="bulletOnKeyUp(this,event)"></li>
                 </ul>
@@ -71,5 +75,8 @@
     <script src="app.js"></script>
     <!-- for menu cloud -->
     <script src="/cloud.js"></script>
+
+    <!-- for save bullet -->
+    <script src="/savePage.js"></script>
 </body>
 </html>

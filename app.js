@@ -212,7 +212,14 @@ function clearCommand(bulletInput){
     command =""
 }
 
+let saveBtn = document.getElementsByClassName("save-btn")[0]
+
 function bulletOnKeyDown(elementInput,event){
+
+    saveBtn.classList.add("not-save")
+    saveBtn.classList.remove("save")
+    console.log("asdf")
+
     // console.log(event.key)
     if (event.key=="Enter"){
         // while getting command
@@ -292,6 +299,8 @@ function bulletOnKeyDown(elementInput,event){
         elementInput.saveText = elementInput.value
         waitForCommand = true
     }
+
+
 }
 function bulletOnKeyUp(element,event){
     if (event.key=="Backspace"){
