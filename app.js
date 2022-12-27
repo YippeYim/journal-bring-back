@@ -142,8 +142,6 @@ function renameNoteTitle(bulletLi,isAfterAddFeeling=false){
     if (isAfterAddFeeling){ 
         noteFeelings = "["
 
-        console.log(bulletLi.parentElement)
-
         for (i=0;i<bulletLi.parentElement.feelings.length;i++){
             noteFeelings += bulletLi.parentElement.feelings[i]
             if (i!=bulletLi.parentElement.feelings.length-1){
@@ -199,14 +197,16 @@ function drawTodayFeel(){
 }
 
 window.addEventListener("load",()=>{
-    if (localStorage.getItem("todayFeel")===null){
-        localStorage.setItem("todayFeel","[]")
-    }    
-    todayFeel = JSON.parse(localStorage.getItem("todayFeel"))
-    drawTodayFeel()
+    // if (localStorage.getItem("todayFeel")===null){
+    //     localStorage.setItem("todayFeel","[]")
+    // }    
+    // todayFeel = JSON.parse(localStorage.getItem("todayFeel"))
+    // drawTodayFeel()
 
     // todo: load page data from localstorage
     loadPageValue();
+
+    drawTodayFeel()
 })
 
 
@@ -270,7 +270,6 @@ function bulletOnKeyDown(elementInput,event){
                         }
                     }
 
-                    localStorage.setItem("todayFeel",JSON.stringify(todayFeel))
                     drawTodayFeel()
                 }
             }

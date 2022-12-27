@@ -20,7 +20,7 @@ function savePageValue(){
 
     for (i=0;i<bulletList.childElementCount;i++){
         let bulletFirstChild = bulletList.children[i].firstElementChild
-        console.log(bulletFirstChild)
+        // console.log(bulletFirstChild)
         // console.log(i)
 
         if (bulletList.children[i].matches(".add-bullet")){
@@ -67,6 +67,7 @@ function savePageValue(){
     let todayPageData = {
         title:title,
         date: todayDate.getDate(),
+        feelings: todayFeel,
         allBulletValue:allBulletValue
     }
     console.log(todayPageData)
@@ -106,11 +107,15 @@ function loadPageValue(){
     const data = JSON.parse(localStorage.getItem("journalData"))
     let todayBulletData = data[todayDate.getDate()]
 
+    if (todayBulletData["feelings"]!==undefined){
+        todayFeel = todayBulletData["feelings"]
+    }
+
     const todayNoteData = JSON.parse(localStorage.getItem("noteBulletData"))[todayDate.getDate()]
 
     document.getElementById("input-title").value = todayBulletData["title"]
 
-    console.log(todayBulletData)
+    // console.log(todayBulletData)
     for (i=0;i<todayBulletData["allBulletValue"].length;i++){
         // console.log(todayBulletData["allBulletValue"][i])
         let bulletValue = todayBulletData["allBulletValue"][i] 
@@ -144,7 +149,6 @@ function loadPageValue(){
 
             // console.log(newBullet)
             ul.insertBefore(newBullet, ul.children[ul.childElementCount-1])
-            console.log(123)
 
             continue
         }
