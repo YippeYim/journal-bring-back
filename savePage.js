@@ -58,6 +58,34 @@ function savePageValue(){
             allNoteBullet.push(noteObject)
 
             allBulletValue.push(Object.keys(allNoteBullet).length)
+
+            // todo: update localstorage if remove note bullet 
+            // * check if ever save => compair with previous save => what is missing
+            // let thisNoteBulletData = JSON.parse(localStorage.getItem("noteBulletData"))[todayDate.getDate()][]
+
+            for(m=0;m<noteObject.feelings.length;m++){
+
+                // * adding to localStorage[feelings] individual
+                let oldFeelingsList = JSON.parse(localStorage.getItem("feelings"))
+                let newFeelingsList = oldFeelingsList
+                if (newFeelingsList==null){
+                    newFeelingsList={}
+                }
+
+                // console.log(i)
+                // console.log(noteObject.feelings[i])
+                if (newFeelingsList[noteObject.feelings[m]]===undefined){
+                    newFeelingsList[noteObject.feelings[m]]=[]
+                }
+                let valueToPush = `${todayDate.getDate()}/${Object.keys(allNoteBullet).length}`
+
+                if (! newFeelingsList[noteObject.feelings[m]].includes(valueToPush)){
+                    newFeelingsList[noteObject.feelings[m]].push(`valueToPush`)
+                }
+                
+                localStorage.setItem("feelings",JSON.stringify(newFeelingsList))
+            }
+
             continue
         }
         
