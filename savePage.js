@@ -10,7 +10,7 @@ let todayDate = {
         return this.date
     },
 }
-todayDate.setDate("24/12/2022")
+// todayDate.setDate("24/12/2022")
 
 function savePageValue(){
     // console.log(bulletList.children)
@@ -40,8 +40,11 @@ function savePageValue(){
             let noteObject = {}
 
             noteObject.title = bulletFirstChild.parentElement.noteTitle
+            if (bulletFirstChild.feelings===undefined || bulletFirstChild.feelings.length==0){
+                alert("Please set feeling of your note bullet before save. <use /feel <yourFeeling> >")
+                return false
+            }
             noteObject.feelings = bulletFirstChild.feelings
-            // todo if not have feelings => you can't save
 
             let allInnerBullet = []
             for (j=0;j<bulletFirstChild.childElementCount;j++){
@@ -79,6 +82,8 @@ function savePageValue(){
     oldData[todayDate.getDate()] = todayPageData
     localStorage.setItem("journalData",JSON.stringify(oldData))
     localStorage.setItem("noteBulletData",JSON.stringify(noteBulletData))
+
+    return true
 }
 // let data = JSON.parse(localStorage.getItem("journalData"))
 // let ndata = JSON.parse(localStorage.getItem("noteBulletData"))
@@ -88,9 +93,10 @@ function savePageValue(){
 let sveBtn = document.getElementsByClassName("save-btn")[0]
 
 saveBtn.addEventListener("click",()=>{
-    savePageValue()
-    saveBtn.classList.remove("not-save")
-    saveBtn.classList.add("save")
+    if (savePageValue()){
+        saveBtn.classList.remove("not-save")
+        saveBtn.classList.add("save")
+    }
 })
 
 function loadPageValue(){
