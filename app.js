@@ -28,7 +28,7 @@ function addBullet(elementLi){
 }
 function addNoteBullet(elementLi){
     if (elementLi.parentElement.matches(".note-container")){
-        alert("Sorry, you can't make note bullet inside note bulelt")
+        alert("Sorry, you can't make note bullet inside note bullet")
         return
     }
     if (elementLi.firstElementChild.saveText.length<1){
@@ -142,6 +142,8 @@ function renameNoteTitle(bulletLi,isAfterAddFeeling=false){
     if (isAfterAddFeeling){ 
         noteFeelings = "["
 
+        console.log(bulletLi.parentElement)
+
         for (i=0;i<bulletLi.parentElement.feelings.length;i++){
             noteFeelings += bulletLi.parentElement.feelings[i]
             if (i!=bulletLi.parentElement.feelings.length-1){
@@ -156,7 +158,6 @@ function renameNoteTitle(bulletLi,isAfterAddFeeling=false){
     }else{
         bulletLiLi.noteTitle = bulletLi.firstElementChild.saveText
         // console.log("renamed")
-        alert("feelling added to note")
     }
     bulletLiLi.innerText = (bulletLiLi.noteTitle + "  " + noteFeelings)
     bulletLiLi.appendChild(save)
@@ -176,7 +177,7 @@ function clearFeelingsBox(){
     feelingsBox.innerHTML = ""
 }
 
-// todo: add feeling to note bullet
+
 function drawTodayFeel(){
     clearFeelingsBox()
     const allCustomFeelings = JSON.parse(localStorage.getItem("customFeelings"))
@@ -203,6 +204,9 @@ window.addEventListener("load",()=>{
     }    
     todayFeel = JSON.parse(localStorage.getItem("todayFeel"))
     drawTodayFeel()
+
+    // todo: load page data from localstorage
+    loadPageValue();
 })
 
 
@@ -218,7 +222,6 @@ function bulletOnKeyDown(elementInput,event){
 
     saveBtn.classList.add("not-save")
     saveBtn.classList.remove("save")
-    console.log("asdf")
 
     // console.log(event.key)
     if (event.key=="Enter"){
