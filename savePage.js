@@ -155,7 +155,9 @@ saveBtn.addEventListener("click",()=>{
         saveBtn.classList.add("save")
     }
 
-    // drawBringNote()
+    // findMatchNote()
+    clearBringNote()
+    drawBringNote(findMatchNote(3))
 })
 
 function loadPageValue(){
