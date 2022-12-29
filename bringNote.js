@@ -5,6 +5,9 @@ function getRandomInt(min,max){
 // todayFeel.length
 function findMatchNote(num=3){
     let feelingsArrayFromls = []
+    if (todayFeel.length==0){
+        return []
+    }
     for (let i in todayFeel){
         feelingsArrayFromls.push(JSON.parse(localStorage.getItem("feelings"))[todayFeel[i]])
     }
@@ -27,6 +30,9 @@ function findMatchNote(num=3){
 const bringContainer = document.getElementsByClassName("bring-container")[0]
 
 function drawBringNote(noteArr){
+    if (noteArr.length==0){
+        return
+    }
     let noteBulletData = JSON.parse(localStorage.getItem("noteBulletData"))
     for(let index in noteArr){
 
