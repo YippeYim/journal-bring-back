@@ -10,7 +10,8 @@ let todayDate = {
         return this.date
     },
 }
-// todayDate.setDate("24/12/2022")
+// todayDate.setDate("25/12/2022")
+todayDate.setDate(localStorage.getItem("todayDate"))
 
 function findMissing(mainArr,compairArr){
     let missing = []
@@ -77,7 +78,12 @@ function savePageValue(){
             allBulletValue.push(Object.keys(allNoteBullet).length)
 
             // * check if ever save => compair with previous save => what is missing
-            let noteFeelingsBeforeChanged = JSON.parse(localStorage.getItem("noteBulletData"))[todayDate.getDate()][Object.keys(allNoteBullet).length-1]["feelings"]
+            let noteFeelingsBeforeChanged = JSON.parse(localStorage.getItem("noteBulletData"))[todayDate.getDate()][Object.keys(allNoteBullet).length-1]
+            if (noteFeelingsBeforeChanged===undefined){
+                noteFeelingsBeforeChanged = []    
+            }else{
+                noteFeelingsBeforeChanged = noteFeelingsBeforeChanged["feelings"]
+            }
             let missingThing =compairArray(noteFeelingsBeforeChanged,noteObject.feelings).missing 
 
             let lsFeelingsList = JSON.parse(localStorage.getItem("feelings"))

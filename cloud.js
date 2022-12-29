@@ -26,13 +26,33 @@ const pageCustomFeelings = document.getElementsByClassName("page-custom-feelings
 const customFeelings = document.getElementById("custom-feelings")
 const backButton = document.getElementsByClassName("back-icon")
 const pageDiv = document.getElementsByClassName("page")
+const jumpToDate = document.getElementById("jump-to-date")
+const pagejumpToDate = document.getElementsByClassName("page-jump-to-date")[0]
+const pagejumpToDateInput = document.getElementById("jump-to-date-input")
+
+jumpToDate.addEventListener('click',goJumpToDatePage)
+
+function goJumpToDatePage(){
+    pageMenu.style.display="none"
+    pagejumpToDate.style.display="block"
+    backButton[0].style.height="70px"
+}
+
+pagejumpToDateInput.parentElement.nextElementSibling.addEventListener('click',()=>{
+    let nonFormatDate = pagejumpToDateInput.value 
+    // 2022-12-29
+    todayDate.setDate(`${nonFormatDate.slice(8)}/${nonFormatDate.slice(5,7)}/${nonFormatDate.slice(0,4)}`)
+    // console.log(`${nonFormatDate.slice(8)}/${nonFormatDate.slice(5,7)}/${nonFormatDate.slice(0,4)}`)
+    localStorage.setItem("todayDate",todayDate.getDate())
+    location.reload()
+})
 
 customFeelings.addEventListener('click',goCustomFeelingsPage)
 
 function goCustomFeelingsPage(){
     pageMenu.style.display="none"
     pageCustomFeelings.style.display="block"
-    backButton[0].style.height="70px"
+    backButton[1].style.height="70px"
 
     drawCustomFeelingsBtn()
 }
@@ -57,7 +77,23 @@ function goMenuPage(){
 
 }
 
+function setJumpToDefault(){
+    let d = new Date()
+    let date = `${d.getDate()}`
+    let month = `${d.getMonth()+1}`
+    if (month.length<2){
+        month = "0"+month
+    }
+    if (date.length<2){
+        date = "0"+date
+    }
+    pagejumpToDateInput.value=`${d.getFullYear()}-${month}-${date}`
+}
+
+
 window.addEventListener("load",()=>{
+    setJumpToDefault()    
+
     goMenuPage()
     closeMenuCloud()
 })

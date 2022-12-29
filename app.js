@@ -197,7 +197,6 @@ function drawTodayFeel(){
 }
 
 window.addEventListener("load",()=>{
-    // todo: load page data from localstorage
     loadPageValue();
 
     drawTodayFeel()
