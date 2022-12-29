@@ -197,12 +197,6 @@ function drawTodayFeel(){
 }
 
 window.addEventListener("load",()=>{
-    // if (localStorage.getItem("todayFeel")===null){
-    //     localStorage.setItem("todayFeel","[]")
-    // }    
-    // todayFeel = JSON.parse(localStorage.getItem("todayFeel"))
-    // drawTodayFeel()
-
     // todo: load page data from localstorage
     loadPageValue();
 

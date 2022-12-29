@@ -242,3 +242,20 @@ li:has(.input-bullet:focus){
     border-radius:10px;    
     background-color:var(--ndcolor);
 }
+
+.bring-box{
+    align-self:center;
+    width:500px;
+}
+.bring-item{
+    margin-top:20px;
+    background-color:rgba(205, 225, 243, 0.308);
+    border-radius: 10px;
+    padding:10px;
+    padding-left:30px;
+}
+.bring-item>div {
+    display:block;
+    text-align: end;
+    
+}

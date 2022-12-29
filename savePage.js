@@ -148,6 +148,8 @@ saveBtn.addEventListener("click",()=>{
         saveBtn.classList.remove("not-save")
         saveBtn.classList.add("save")
     }
+
+    // drawBringNote()
 })
 
 function loadPageValue(){

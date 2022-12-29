@@ -11,7 +11,7 @@
     <nav>
         <img class="logo" src="icon.png" >
         <!-- <img onclick="openMenuCloud()" class="setting" src="/asset/menu-burger.svg" > -->
-        <div class="btn-wrapper" style="border:1px solid black;">
+        <div class="btn-wrapper" >
             <button class="save-btn not-save">save</button>
             <img onclick="openMenuCloud()" class="setting" src="/asset/menu-burger.svg" >
         </div>
@@ -72,11 +72,70 @@
         </ul>
     </div>
 
+<!-- * interresting <form action="/action_page.php" method="get">
+  <label for="browser">Choose your browser from the list:</label>
+  <input list="browsers" name="browser" id="browser">
+  <datalist id="browsers">
+    <option value="Edge">
+    <option value="Firefox">
+    <option value="Chrome">
+    <option value="Opera">
+    <option value="Safari">
+  </datalist>
+  <input type="submit">
+</form> -->
+
+    <div class="bring-box">
+        <select id="number-to-show">
+            <option value="" disabled>show n~</option>
+            <option value="1">1</option>
+            <option value="3" selected>3</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+        </select>
+
+        <div class="bring-item">
+            <h2>This is Title</h2>
+            <ul>
+                <li>first bullet</li>
+                <li>last bullet</li>
+            </ul>
+            <div>
+                <a href="#">date</a>
+            </div>
+        </div>
+        <div class="bring-item">
+            <h2>This is Title</h2>
+            <ul>
+                <li>first bullet</li>
+                <li>first bullet</li>
+                <li>last bullet</li>
+            </ul>
+            <div>
+                <a href="#">date</a>
+            </div>
+        </div>
+        <div class="bring-item">
+            <h2>This is Title</h2>
+            <ul>
+                <li>first bullet</li>
+                <li>first bullet</li>
+                <li>first bullet</li>
+                <li>last bullet</li>
+            </ul>
+            <div>
+                <a href="#">date</a>
+            </div>
+        </div>
+    </div>
+
     <script src="app.js"></script>
     <!-- for menu cloud -->
     <script src="/cloud.js"></script>
 
     <!-- for save bullet -->
     <script src="/savePage.js"></script>
+
+    <script src="/bringNote.js"></script>
 </body>
 </html>
