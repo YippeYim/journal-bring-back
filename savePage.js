@@ -12,13 +12,30 @@ let todayDate = {
 }
 // todayDate.setDate("24/12/2022")
 
+function findMissing(mainArr,compairArr){
+    let missing = []
+    for (let i in mainArr){
+        if (compairArr.indexOf(mainArr[i])===-1){
+            missing.push(mainArr[i])
+        }
+    }
+    return missing
+}
+
+function compairArray(mainArr,compairArr){
+    return {
+        missing:findMissing(mainArr,compairArr),
+        added:findMissing(compairArr,mainArr)
+    }
+}
+
 function savePageValue(){
     // console.log(bulletList.children)
     let title = document.getElementById("input-title").value
     const allBulletValue = []
     const allNoteBullet = []
 
-    for (i=0;i<bulletList.childElementCount;i++){
+    for (let i=0;i<bulletList.childElementCount;i++){
         let bulletFirstChild = bulletList.children[i].firstElementChild
         // console.log(bulletFirstChild)
         // console.log(i)
@@ -47,7 +64,7 @@ function savePageValue(){
             noteObject.feelings = bulletFirstChild.feelings
 
             let allInnerBullet = []
-            for (j=0;j<bulletFirstChild.childElementCount;j++){
+            for (let j=0;j<bulletFirstChild.childElementCount;j++){
                 allInnerBullet.push(bulletFirstChild.children[j].firstElementChild.value)
             }
 
@@ -59,11 +76,18 @@ function savePageValue(){
 
             allBulletValue.push(Object.keys(allNoteBullet).length)
 
-            // todo: update localstorage if remove note bullet 
             // * check if ever save => compair with previous save => what is missing
-            // let thisNoteBulletData = JSON.parse(localStorage.getItem("noteBulletData"))[todayDate.getDate()][]
+            let noteFeelingsBeforeChanged = JSON.parse(localStorage.getItem("noteBulletData"))[todayDate.getDate()][Object.keys(allNoteBullet).length-1]["feelings"]
+            let missingThing =compairArray(noteFeelingsBeforeChanged,noteObject.feelings).missing 
 
-            for(m=0;m<noteObject.feelings.length;m++){
+            let lsFeelingsList = JSON.parse(localStorage.getItem("feelings"))
+            for (let index in missingThing){
+                lsFeelingsList[missingThing[index]].splice(lsFeelingsList[missingThing[index]].indexOf( `${todayDate.getDate()}/${Object.keys(allNoteBullet).length}`),1)
+            }
+            localStorage.setItem("feelings",JSON.stringify(lsFeelingsList))
+            
+
+            for(let m=0;m<noteObject.feelings.length;m++){
 
                 // * adding to localStorage[feelings] individual
                 let oldFeelingsList = JSON.parse(localStorage.getItem("feelings"))
@@ -80,7 +104,7 @@ function savePageValue(){
                 let valueToPush = `${todayDate.getDate()}/${Object.keys(allNoteBullet).length}`
 
                 if (! newFeelingsList[noteObject.feelings[m]].includes(valueToPush)){
-                    newFeelingsList[noteObject.feelings[m]].push(`valueToPush`)
+                    newFeelingsList[noteObject.feelings[m]].push(valueToPush)
                 }
                 
                 localStorage.setItem("feelings",JSON.stringify(newFeelingsList))
@@ -98,10 +122,8 @@ function savePageValue(){
         feelings: todayFeel,
         allBulletValue:allBulletValue
     }
-    console.log(todayPageData)
-    console.log(allNoteBullet)
-
-    // TODO: add notebullet to localstorage[feelings]
+    // console.log(todayPageData)
+    // console.log(allNoteBullet)
 
     // load old data to add new data
     let oldData = JSON.parse(localStorage.getItem("journalData"))
@@ -144,7 +166,7 @@ function loadPageValue(){
     document.getElementById("input-title").value = todayBulletData["title"]
 
     // console.log(todayBulletData)
-    for (i=0;i<todayBulletData["allBulletValue"].length;i++){
+    for (let i=0;i<todayBulletData["allBulletValue"].length;i++){
         // console.log(todayBulletData["allBulletValue"][i])
         let bulletValue = todayBulletData["allBulletValue"][i] 
         if (typeof(bulletValue)==="number"){
@@ -162,7 +184,7 @@ function loadPageValue(){
             }
 
             // console.log(todayNoteData[bulletValue-1]["innerBullet"])
-            for (j=0;j<todayNoteData[bulletValue-1]["innerBullet"].length;j++){
+            for (let j=0;j<todayNoteData[bulletValue-1]["innerBullet"].length;j++){
                 let childBullet = document.createElement("li")
                 childBullet.innerHTML = "<input type='text' class='input-bullet' onkeydown='bulletOnKeyDown(this,event)' onkeyup='bulletOnKeyUp(this,event)'>"
                 childBullet.firstElementChild.value = todayNoteData[bulletValue-1]["innerBullet"][j]
@@ -191,7 +213,7 @@ function loadPageValue(){
     // remore first bullet
     ul.removeChild(ul.children[2])
 
-    for (k=0;k<todayNoteData.length;k++){
+    for (let k=0;k<todayNoteData.length;k++){
         renameNoteTitle(ul.children[todayNoteData[k]["originBulletOrder"]+2].firstElementChild.lastElementChild, true)
         ul.children[todayNoteData[k]["originBulletOrder"]+2].firstElementChild.removeChild(ul.children[todayNoteData[k]["originBulletOrder"]+2].firstElementChild.lastElementChild)
         
