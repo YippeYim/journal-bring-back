@@ -219,6 +219,7 @@ function bulletOnKeyDown(elementInput,event){
 
     saveBtn.classList.add("not-save")
     saveBtn.classList.remove("save")
+    saveBtn.innerText = "saved"
 
     // console.log(event.key)
     if (event.key=="Enter"){

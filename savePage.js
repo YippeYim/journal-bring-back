@@ -183,6 +183,7 @@ saveBtn.addEventListener("click",()=>{
     if (savePageValue()){
         saveBtn.classList.remove("not-save")
         saveBtn.classList.add("save")
+        saveBtn.innerText = "saved"
     }
 
     resetBringNote()
