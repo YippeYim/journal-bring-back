@@ -203,7 +203,7 @@ window.addEventListener("load",()=>{
     }
 
     if (! (JSON.parse(localStorage.getItem("journalData"))[todayDate.getDate()]===undefined)){
-        // console.log("not first time")
+        console.log("not first time")
         loadPageValue();
     }
 
