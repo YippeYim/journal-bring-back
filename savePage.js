@@ -16,7 +16,7 @@ todayDate.setDate(localStorage.getItem("todayDate"))
 function findMissing(mainArr,compairArr){
     let missing = []
     for (let i in mainArr){
-        if (compairArr.indexOf(mainArr[i])===-1){
+        if (compairArr.indexOf( mainArr[i] )===-1){
             missing.push(mainArr[i])
         }
     }
@@ -77,21 +77,23 @@ function savePageValue(){
 
             allBulletValue.push(Object.keys(allNoteBullet).length)
 
-            // * check if ever save => compair with previous save => what is missing
-            let noteFeelingsBeforeChanged = JSON.parse(localStorage.getItem("noteBulletData"))[todayDate.getDate()][Object.keys(allNoteBullet).length-1]
-            if (noteFeelingsBeforeChanged===undefined){
-                noteFeelingsBeforeChanged = []    
-            }else{
-                noteFeelingsBeforeChanged = noteFeelingsBeforeChanged["feelings"]
-            }
-            let missingThing =compairArray(noteFeelingsBeforeChanged,noteObject.feelings).missing 
+            // * if first time=> don't load
+            if (!(JSON.parse(localStorage.getItem("journalData"))[todayDate.getDate()]===undefined)){
+                // * check if ever save => compair with previous save => what is missing
+                let noteFeelingsBeforeChanged = JSON.parse(localStorage.getItem("noteBulletData"))[todayDate.getDate()][Object.keys(allNoteBullet).length-1]
+                if (noteFeelingsBeforeChanged===undefined){
+                    noteFeelingsBeforeChanged = []    
+                }else{
+                    noteFeelingsBeforeChanged = noteFeelingsBeforeChanged["feelings"]
+                }
+                let missingThing =compairArray(noteFeelingsBeforeChanged,noteObject.feelings).missing 
 
-            let lsFeelingsList = JSON.parse(localStorage.getItem("feelings"))
-            for (let index in missingThing){
-                lsFeelingsList[missingThing[index]].splice(lsFeelingsList[missingThing[index]].indexOf( `${todayDate.getDate()}/${Object.keys(allNoteBullet).length}`),1)
+                let lsFeelingsList = JSON.parse(localStorage.getItem("feelings"))
+                for (let index in missingThing){
+                    lsFeelingsList[missingThing[index]].splice(lsFeelingsList[missingThing[index]].indexOf( `${todayDate.getDate()}/${Object.keys(allNoteBullet).length}`),1)
+                }
+                localStorage.setItem("feelings",JSON.stringify(lsFeelingsList))
             }
-            localStorage.setItem("feelings",JSON.stringify(lsFeelingsList))
-            
 
             for(let m=0;m<noteObject.feelings.length;m++){
 
@@ -128,16 +130,43 @@ function savePageValue(){
         feelings: todayFeel,
         allBulletValue:allBulletValue
     }
-    // console.log(todayPageData)
+    console.log(todayPageData)
     // console.log(allNoteBullet)
 
     // load old data to add new data
     let oldData = JSON.parse(localStorage.getItem("journalData"))
     let noteBulletData = JSON.parse(localStorage.getItem("noteBulletData"))
 
-    noteBulletData[todayDate.getDate()] = allNoteBullet
+
+    // * if first time=> don't load
+    if (!(JSON.parse(localStorage.getItem("journalData"))[todayDate.getDate()]===undefined)){
+
+        // * check if note bullet is removed => remove that note from ls[feelings]
+        let missingNoteIndex = []
+        missingNoteIndex = compairArray(oldData[todayDate.getDate()]["allBulletValue"],todayPageData["allBulletValue"]).missing
+        if (missingNoteIndex.length!=0 ){
+            let lsFeel = JSON.parse(localStorage.getItem("feelings"))
+            for (let m in missingNoteIndex){
+                if (typeof(missingNoteIndex[m])!=="number") continue
+
+                console.log(noteBulletData[todayDate.getDate()][missingNoteIndex[m]-1]["feelings"])
+                for (let f in noteBulletData[todayDate.getDate()][missingNoteIndex[m]-1]["feelings"]){
+                    let lsFeelToDo = lsFeel[noteBulletData[todayDate.getDate()][missingNoteIndex[m]-1]["feelings"][f]]
+                    lsFeelToDo.splice(lsFeelToDo.indexOf(`${todayPageData.date}/${missingNoteIndex[m]}`),1)
+
+                    lsFeel[noteBulletData[todayDate.getDate()][missingNoteIndex[m]-1]["feelings"][f]] = lsFeelToDo
+                    // console.log(lsFeelToDo)
+                }
+            }
+            localStorage.setItem("feelings",JSON.stringify(lsFeel))
+            // console.log("done remove missing note")
+        } 
+    }
+
     oldData[todayDate.getDate()] = todayPageData
     localStorage.setItem("journalData",JSON.stringify(oldData))
+
+    noteBulletData[todayDate.getDate()] = allNoteBullet
     localStorage.setItem("noteBulletData",JSON.stringify(noteBulletData))
 
     return true

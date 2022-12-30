@@ -30,9 +30,9 @@ function findMatchNote(num=3){
 const bringContainer = document.getElementsByClassName("bring-container")[0]
 
 function drawBringNote(noteArr){
-    if (noteArr.length==0){
-        return
-    }
+    if (todayFeel.length==0) return
+    if (noteArr.length==0) return
+    
     let noteBulletData = JSON.parse(localStorage.getItem("noteBulletData"))
     for(let index in noteArr){
 

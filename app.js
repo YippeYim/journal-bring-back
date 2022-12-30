@@ -197,7 +197,11 @@ function drawTodayFeel(){
 }
 
 window.addEventListener("load",()=>{
-    loadPageValue();
+    // * if first time=> don't load
+    if (! (JSON.parse(localStorage.getItem("journalData"))[todayDate.getDate()]===undefined)){
+        // console.log("not first time")
+        loadPageValue();
+    }
 
     drawTodayFeel()
 })
