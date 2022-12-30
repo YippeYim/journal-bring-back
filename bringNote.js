@@ -29,6 +29,15 @@ function findMatchNote(num=3){
 
 const bringContainer = document.getElementsByClassName("bring-container")[0]
 
+bringContainer.previousElementSibling.addEventListener('click',resetBringNote)
+
+function resetBringNote(){
+    clearBringNote()
+    drawBringNote(findMatchNote(bringContainer.parentElement.children[0].value))
+    // console.log(bringContainer.parentElement.children[0].value)
+    
+}
+
 function drawBringNote(noteArr){
     if (todayFeel.length==0) return
     if (noteArr.length==0) return

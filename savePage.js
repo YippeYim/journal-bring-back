@@ -178,15 +178,14 @@ function savePageValue(){
 
 let sveBtn = document.getElementsByClassName("save-btn")[0]
 
+
 saveBtn.addEventListener("click",()=>{
     if (savePageValue()){
         saveBtn.classList.remove("not-save")
         saveBtn.classList.add("save")
     }
 
-    // findMatchNote()
-    clearBringNote()
-    drawBringNote(findMatchNote(3))
+    resetBringNote()
 })
 
 function loadPageValue(){
