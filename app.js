@@ -1,9 +1,11 @@
+let dd = new Date()
+
 if (!localStorage.getItem("visited")){
     console.log("first time visit")
     localStorage.setItem("journalData","{}")
     localStorage.setItem("noteBulletData","{}")
     localStorage.setItem("customFeelings","{}")
-    localStorage.setItem("todayDate",todayDate.getDate())
+    localStorage.setItem("todayDate", `${dd.getDate()}/${ dd.getMonth()+1 }/${ dd.getFullYear() }`)
 
     localStorage.setItem("visited",true)
 }
