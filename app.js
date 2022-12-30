@@ -1,3 +1,4 @@
+const data = new Date()
 if (!localStorage.getItem("visited")){
     console.log("first time visit")
     localStorage.setItem("journalData","{}")
