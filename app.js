@@ -3,6 +3,7 @@ if (!localStorage.getItem("visited")){
     localStorage.setItem("journalData","{}")
     localStorage.setItem("noteBulletData","{}")
     localStorage.setItem("customFeelings","{}")
+    localStorage.setItem("todayDate", `${date.getDate()}/${ date.getMonth()+1 }/${ date.getFullYear() }`)
 
     localStorage.setItem("visited",true)
 }
