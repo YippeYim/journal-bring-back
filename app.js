@@ -1,3 +1,12 @@
+if (!localStorage.getItem("visited")){
+    console.log("first time visit")
+    localStorage.setItem("journalData","{}")
+    localStorage.setItem("noteBulletData","{}")
+
+    localStorage.setItem("visited",true)
+}
+
+
 const addBtnElements = document.getElementsByClassName("add-bullet")
 
 for(let i=0;i<addBtnElements.length;i++){
