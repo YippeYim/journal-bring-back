@@ -2,6 +2,7 @@ if (!localStorage.getItem("visited")){
     console.log("first time visit")
     localStorage.setItem("journalData","{}")
     localStorage.setItem("noteBulletData","{}")
+    localStorage.setItem("customFeelings","{}")
 
     localStorage.setItem("visited",true)
 }
