@@ -207,8 +207,13 @@ function drawTodayFeel(){
 
 window.addEventListener("load",()=>{
     // * if first time=> don't load
+    if (localStorage.getItem("journalData")===undefined){
+        console.log("don't have journalData")
+        localStorage.setItem("journalData","{}")
+    }
+
     if (! (JSON.parse(localStorage.getItem("journalData"))[todayDate.getDate()]===undefined)){
-        // console.log("not first time")
+        console.log("not first time")
         loadPageValue();
     }
 
