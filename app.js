@@ -1,10 +1,9 @@
-const data = new Date()
 if (!localStorage.getItem("visited")){
     console.log("first time visit")
     localStorage.setItem("journalData","{}")
     localStorage.setItem("noteBulletData","{}")
     localStorage.setItem("customFeelings","{}")
-    localStorage.setItem("todayDate", `${date.getDate()}/${ date.getMonth()+1 }/${ date.getFullYear() }`)
+    localStorage.setItem("todayDate",todayDate.getDate())
 
     localStorage.setItem("visited",true)
 }
